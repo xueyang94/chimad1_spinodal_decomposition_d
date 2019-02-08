@@ -142,11 +142,11 @@
     # out of all samples that have been taken (at linear and non-linear iterations)
     execute_on = 'INITIAL TIMESTEP_END NONLINEAR LINEAR'
   [../]
-  # [./walltime]
-  #   type = PerformanceData
-  #   event = ALIVE
-  #   execute_on = 'INITIAL TIMESTEP_END'
-  # [../]
+  [./walltime]
+    type = PerformanceData
+    event = ALIVE
+    execute_on = 'INITIAL TIMESTEP_END'
+   [../]
 []
 
 [Debug]
@@ -154,12 +154,18 @@
 []
 
 [Outputs]
-  exodus = true
-  #console = true
-  csv = true
   perf_graph = true
-  # [./console]
-  #   type = Console
-  #   max_rows = 10
-  # [../]
+  [./console]
+    type = Console
+    execute_on = 'initial timestep_begin timestep_end failed'
+  [../]
+  [./csv]
+    type = CSV
+    execute_on = 'initial timestep_end'
+  [../]
+  [./exodus]
+    type = Exodus
+    execute_on = 'initial timestep_end'
+    interval = 100
+  [../]
 []
